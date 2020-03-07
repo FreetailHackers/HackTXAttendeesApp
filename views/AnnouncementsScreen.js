@@ -7,7 +7,7 @@ export default class AnnouncementsScreen extends Component {
             <>
                 <StatusBar barStyle='dark-content' />
                 <SafeAreaView style={{flex : 1, backgroundColor: "#00FF00"}}>
-                    <Text>my profile</Text>
+                    <Text>announcements</Text>
                 </SafeAreaView>
             </>
         );

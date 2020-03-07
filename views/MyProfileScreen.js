@@ -2,6 +2,9 @@ import React, {Component} from 'react'
 import { StatusBar, SafeAreaView, Text } from 'react-native'
 
 export default class MyProfileScreen extends Component {
+    // Actual login stuff
+    // Login sends request to verify in normal manner (check user exists + bcrypt)
+    // If valid login, create randon ass key
     render() {
         return (
             <>
