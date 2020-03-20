@@ -29,7 +29,7 @@ const Tab = createBottomTabNavigator();
 function MyStack() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Map" component={CalendarScreen} />
+      <Tab.Screen name="Map" component={MapScreen} />
       <Tab.Screen name="Announcements" component={AnnouncementsScreen} />
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Calendar" component={CalendarScreen} />

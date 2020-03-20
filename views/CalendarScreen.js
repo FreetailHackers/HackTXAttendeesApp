@@ -10,7 +10,7 @@ export default class CalendarScreen extends Component {
             <>
                 <StatusBar barStyle='dark-content' />
                 <SafeAreaView style={{flex : 1, backgroundColor: "#00FF00"}}>
-                    <Text>my profile</Text>
+                    <Text>calendar</Text>
                 </SafeAreaView>
             </>
         );

@@ -10,7 +10,7 @@ export default class MapScreen extends Component {
             <>
                 <StatusBar barStyle='dark-content' />
                 <SafeAreaView style={{flex : 1, backgroundColor: "#00FF00"}}>
-                    <Text>my profile</Text>
+                    <Text>map screen</Text>
                 </SafeAreaView>
             </>
         );

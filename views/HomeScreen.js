@@ -7,7 +7,7 @@ export default class HomeScreen extends Component {
             <>
                 <StatusBar barStyle='dark-content' />
                 <SafeAreaView style={{flex : 1, backgroundColor: "#00FF00"}}>
-                    <Text>Good meme</Text>
+                    <Text>home</Text>
                 </SafeAreaView>
             </>
         );
