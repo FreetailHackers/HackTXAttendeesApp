@@ -57,3 +57,10 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+
+server/__pycache__/
+server/application/__pycache__/
+.vscode/
+server/venv/
+server/.env
+server/application/db/
