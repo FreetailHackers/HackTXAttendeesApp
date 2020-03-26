@@ -10,19 +10,17 @@ import React, { useEffect, useReducer, useMemo } from 'react';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import AsyncStorage from '@react-native-community/async-storage'
 
-import HomeScreen from './views/HomeScreen'
-import AnnouncementsScreen from './views/AnnouncementsScreen';
-import Login from './views/Login';
-import CalendarScreen from './views/CalendarScreen';
-import MapScreen from './views/MapScreen';
+import HomeScreen from './views/screens/HomeScreen'
+import AnnouncementsScreen from './views/screens/AnnouncementsScreen';
+import Login from './views/screens/Login';
+import CalendarScreen from './views/screens/CalendarScreen';
+import MapScreen from './views/screens/MapScreen';
+import Profile from './views/screens/Profile'
 
-import { AuthProvider } from './views/AuthContext';
+import { AuthProvider } from './views/context/AuthContext';
 
-import storage from './views/Storage'
-
-import Text from 'react-native'
+import storage from './views/storage/Storage'
 
 const Tab = createBottomTabNavigator();
 
@@ -99,9 +97,10 @@ export default function App() {
         catch(e) {
           console.log(e);
         }
-        dispatch({type : "SIGN_OUT"});
+        dispatch({type : "LOG_OUT"});
       }
     }),[]);
+    
     return (
         <NavigationContainer>
           <AuthProvider value={authContext}>
@@ -112,6 +111,7 @@ export default function App() {
                 <Tab.Screen name="Announcements" component={AnnouncementsScreen} />
                 <Tab.Screen name="Home" component={HomeScreen} />
                 <Tab.Screen name="Calendar" component={CalendarScreen} />
+                <Tab.Screen name="My Profile" component={Profile} />
                 </>
                 : <Tab.Screen name="Login" component={Login} />
               }

@@ -1,8 +1,8 @@
 import React, {useState, useContext} from 'react'
 import { StatusBar, SafeAreaView, Text, TextInput, Button} from 'react-native'
-import AuthContext from './AuthContext'
+import AuthContext from '../context/AuthContext'
 
-export default function MyProfileScreen({navigation}) {
+export default function Login({navigation}) {
     const { signIn } = useContext(AuthContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
