@@ -4,7 +4,7 @@ class User(db.Model):
     __tablename__ = 'users'
     _id = db.Column(db.String(36), primary_key=True)
     email = db.Column(db.String(64), index=False, unique=True, nullable=False)
-    password = db.Column(db.String(250), index=False, unique=False, nullable=False)
+    password = db.Column(db.LargeBinary, index=False, unique=False, nullable=False)
     auth_token = db.Column(db.String(64), index=False, unique=True, nullable=False)
     pushed = db.Column(db.DateTime, index=False, unique=False, nullable=False)
     

@@ -33,5 +33,5 @@ def login():
             user = User.query.filter_by(email=email).first()
             if user:
                 if bcrypt.checkpw(rawPass.encode(), user.password):
-                    return jsonify({"status" : "Successfully logged in", "auth_token" : user.auth_token})
-    return jsonify({"status" : "failed to log in"})
+                    return jsonify({"code" : 200, "status" : "Successfully logged in", "authToken" : user.auth_token})
+    return jsonify({"code" : "401", "status" : "failed to log in"})
