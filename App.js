@@ -14,8 +14,8 @@ import {
   View,
   Text,
   StatusBar,
+  Button
 } from 'react-native';
-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from './views/HomeScreen'
@@ -23,8 +23,10 @@ import AnnouncementsScreen from './views/AnnouncementsScreen';
 import MyProfileScreen from './views/MyProfileScreen';
 import CalendarScreen from './views/CalendarScreen';
 import MapScreen from './views/MapScreen';
+import firebase from 'react-native-firebase';
 
 const Tab = createBottomTabNavigator();
+
 
 function MyStack() {
   return (
@@ -46,4 +48,16 @@ export default class App extends Component {
       </NavigationContainer>
     );
   }
+  /*
+  componentWillMount() {
+  	  firebase.messaging().getToken()
+  .then(fcmToken => {
+    if (fcmToken) {
+      console.log(fcmToken);
+    } else {
+      // user doesn't have a device token yet
+    } 
+  });
+  }
+  */
 }
