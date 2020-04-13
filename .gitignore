@@ -64,3 +64,5 @@ server/application/__pycache__/
 server/venv/
 server/.env
 server/application/db/
+
+.vs

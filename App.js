@@ -9,11 +9,12 @@ import React, { useEffect, useReducer, useMemo } from 'react';
 import {
   Alert
 } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { AuthProvider } from './views/context/AuthContext';
 
 import storage from './views/storage/Storage';
+
+import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from './views/screens/HomeScreen'
 import AnnouncementsScreen from './views/screens/AnnouncementsScreen';
@@ -26,7 +27,7 @@ import Results from './views/screens/Results';
 
 import firebase from 'react-native-firebase';
 
-const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 function reducer(prevState, action) {
   switch(action.type) {
@@ -213,20 +214,17 @@ export default function App() {
     return (
         <NavigationContainer>
           <AuthProvider value={authContext}>
-          <Tab.Navigator>
-              {state.authToken != null ?
+            <Stack.Navigator>
                 <>
-                <Tab.Screen name="Map" component={MapScreen} />
-                <Tab.Screen name="Announcements" component={AnnouncementsScreen} />
-                <Tab.Screen name="Home" component={HomeScreen} />
-                <Tab.Screen name="Calendar" component={CalendarScreen} />
-                <Tab.Screen name="My Profile" component={Profile} />
-                <Tab.Screen name="Quiz" component={Quiz} />
-                <Tab.Screen name="Results" component={Results} />
+                <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="Map" component={MapScreen} />
+                <Stack.Screen name="Announcements" component={AnnouncementsScreen} />
+                <Stack.Screen name="Calendar" component={CalendarScreen} />
+                <Stack.Screen name="My Profile" component={Profile} />
+                <Stack.Screen name="Quiz" component={Quiz} />
+                <Stack.Screen name="Results" component={Results} />
                 </>
-                : <Tab.Screen name="Login" component={Login} />
-              }
-            </Tab.Navigator>
+            </Stack.Navigator>
           </AuthProvider>
         </NavigationContainer>
     );
