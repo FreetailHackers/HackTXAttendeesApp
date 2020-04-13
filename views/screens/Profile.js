@@ -4,7 +4,6 @@ import AuthContext from '../context/AuthContext';
 
 export default function Profile({notifications}) {
     const { signOut } = useContext(AuthContext);
-
     return (
         <>
             <StatusBar barStyle='dark-content' />

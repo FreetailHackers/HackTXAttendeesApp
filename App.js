@@ -8,8 +8,8 @@
 
 import React, { useEffect, useReducer, useMemo } from 'react';
 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from './views/screens/HomeScreen'
 import AnnouncementsScreen from './views/screens/AnnouncementsScreen';
@@ -22,7 +22,7 @@ import { AuthProvider } from './views/context/AuthContext';
 
 import storage from './views/storage/Storage'
 
-const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 function reducer(prevState, action) {
   switch(action.type) {
@@ -104,18 +104,15 @@ export default function App() {
     return (
         <NavigationContainer>
           <AuthProvider value={authContext}>
-            <Tab.Navigator>
-              {state.authToken != null ?
+            <Stack.Navigator>
                 <>
-                <Tab.Screen name="Map" component={MapScreen} />
-                <Tab.Screen name="Announcements" component={AnnouncementsScreen} />
-                <Tab.Screen name="Home" component={HomeScreen} />
-                <Tab.Screen name="Calendar" component={CalendarScreen} />
-                <Tab.Screen name="My Profile" component={Profile} />
+                <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="Map" component={MapScreen} />
+                <Stack.Screen name="Announcements" component={AnnouncementsScreen} />
+                <Stack.Screen name="Calendar" component={CalendarScreen} />
+                <Stack.Screen name="My Profile" component={Profile} />
                 </>
-                : <Tab.Screen name="Login" component={Login} />
-              }
-            </Tab.Navigator>
+            </Stack.Navigator>
           </AuthProvider>
         </NavigationContainer>
     );
