@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, Button, StyleSheet } from 'react-native'
-import { LocalNotification } from '../android/app/src/services/LocalPushController'
-import { RemotePushController } from '../android/app/src/services/RemotePushController'
+import { LocalNotification } from '../../android/app/src/services/LocalPushController'
+import { RemotePushController } from '../../android/app/src/services/RemotePushController'
  
 
  export default function AnnouncementsScreen() {
