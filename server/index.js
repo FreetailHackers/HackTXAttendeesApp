@@ -43,7 +43,7 @@ app.post('/login', (req, res)=>{
       if(err) console.log(err);    
       if(users.length === 0)
       {      
-        res.json({"code": 401, "status" : "failed to log in"});
+        res.json({"code": 401, "message" : "Failed to log in"});
         return;
       }
       else
@@ -52,13 +52,37 @@ app.post('/login', (req, res)=>{
         bcrypt.compare(req.body.password, user.password, (err, match) => {
             if(match)
             {
-              res.json({"code": 200, "status" : "success", "authToken": user.auth_token});
+              res.json({"code": 200, "message" : "success", "authToken": user.auth_token, "email" : user.email});
             }
             else
             {
-              res.json({"code": 401, "status" : "failed to log in"});
+              res.json({"code": 401, "message" : "Failed to log in"});
             }
         })
       }
     })
   });
+
+  app.post('/push-results', (req, res) => {
+      console.log(req.body)
+      Users.find({'email': req.body.email}, (err, users) => {
+          if(err) console.log(err);
+          if(users.length === 0) {
+              res.json({"code": 401, "message" : "User not found"})
+              return;
+          }
+          else {
+              const user = users[0];
+              if(req.body.authToken !== user.auth_token) {
+                res.json({"code": 401, "message" : "Invalid auth token"})
+                return;
+              }
+              else {
+                console.log("made it to end")
+                let payload = {taken: true, results: req.body.results};
+                Users.updateOne({email: req.body.email}, {"$set" : {quiz_results : payload}});
+                res.json({"code": 200, "message": "Successfully pushed results"})
+              }
+          }
+      })
+  })

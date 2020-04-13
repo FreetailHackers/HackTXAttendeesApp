@@ -6,7 +6,11 @@ var userSchema = {
     email: String,
     password: String,
     auth_token: String,
-    pushed: {type : Date, default: Date.now}
+    pushed: {type : Date, default: Date.now},
+    quiz_results : {
+        taken : {type: Boolean, default: false},
+        results: {type: [Number], default: [0,0,0,0,0]}
+    }
 }
 
 var User = mongoose.model("User", userSchema);
