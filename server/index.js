@@ -63,7 +63,7 @@ app.post('/login', (req, res)=>{
     })
   });
 
-  app.post('/push-results', (req, res) => {
+  app.post('/results/', (req, res) => {
       console.log(req.body)
       Users.find({'email': req.body.email}, (err, users) => {
           if(err) console.log(err);
@@ -78,11 +78,45 @@ app.post('/login', (req, res)=>{
                 return;
               }
               else {
-                console.log("made it to end")
-                let payload = {taken: true, results: req.body.results};
-                Users.updateOne({email: req.body.email}, {"$set" : {quiz_results : payload}});
-                res.json({"code": 200, "message": "Successfully pushed results"})
+                console.log(user);
+                Users.updateOne({_id: user._id}, {$set : {"quiz_results.taken" : true, "quiz_results.results" : req.body.results}}, (err, user) => {
+                    res.json({"code": 200, "message": "Successfully pushed results"});
+                });
+
               }
           }
       })
+  })
+
+  app.get('/results', (req, res) => {
+    console.log(req.body)
+    
+    const computeScore = (a, b) => {
+        let diffSum = 0;
+    }
+
+    Users.find({'email': req.body.email}, (err, users) => {
+        if(err) console.log(err);
+        if(users.length === 0) {
+            res.json({"code": 401, "message" : "User not found"})
+            return;
+        }
+        else {
+            const user = users[0];
+            if(req.body.authToken !== user.auth_token) {
+              res.json({"code": 401, "message" : "Invalid auth token"})
+              return;
+            }
+            else {
+              console.log(user);
+              Users.find({'email' : {$ne : req.body.email}}, (err, users) => {
+                  users.map((user, index) => {
+                      return {email: user.email}
+                  })
+                  console.log(users);
+                  res.json({"code": 200, "message" : "Results found", "results" : users})
+              })
+            }
+        }
+    })
   })

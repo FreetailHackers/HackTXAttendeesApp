@@ -4,8 +4,8 @@ import LegacyStorage from '@react-native-community/async-storage-backend-legacy'
 const legacyStorage = new LegacyStorage();
 
 export type StorageModel = {
-    auth_token : {
-        auth_token : string
+    curr_user : {
+        curr_user : string
     }
 }
 

@@ -11,6 +11,9 @@ import {
 } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import { AuthProvider } from './views/context/AuthContext';
+
+import storage from './views/storage/Storage';
 
 import HomeScreen from './views/screens/HomeScreen'
 import AnnouncementsScreen from './views/screens/AnnouncementsScreen';
@@ -18,38 +21,37 @@ import Login from './views/screens/Login';
 import CalendarScreen from './views/screens/CalendarScreen';
 import MapScreen from './views/screens/MapScreen';
 import Profile from './views/screens/Profile'
-import firebase from 'react-native-firebase';
-import { AuthProvider } from './views/context/AuthContext';
+import Quiz from './views/screens/Quiz';
+import Results from './views/screens/Results';
 
-import storage from './views/storage/Storage'
+import firebase from 'react-native-firebase';
 
 const Tab = createBottomTabNavigator();
 
 function reducer(prevState, action) {
   switch(action.type) {
     case "RESTORE_TOKEN":
-      return {...prevState, isLoading: false, authToken: action.authToken};
+      return {...prevState, isLoading: false, authToken: action.authToken, email: action.email};
     case "LOG_IN":
-      return {...prevState, isSignOut: false, authToken: action.authToken};
+      return {...prevState, isSignOut: false, authToken: action.authToken, email: action.email};
     case "LOG_OUT":
-      return {...prevState, isSignOut: true, authToken: null};
+      return {...prevState, isSignOut: true, authToken: null, email: null};
     default:
       throw Error();
   }
 }
 
-async function storeToken(authToken) {
+async function storeCurrUser(payload) {
   try {
-    const payload = authToken;
-    await storage.set('auth_token', payload);
+    await storage.set('curr_user', JSON.stringify(payload));
   }
   catch(e) {
     console.log(e)
   }
-}
+} 
 
 export default function App() {
-    const initalState = {isLoading : true, isSignOut: false, authToken: null};
+    const initalState = {isLoading : true, isSignOut: false, authToken: null, email: null};
     const [state, dispatch] = useReducer(reducer, initalState);
 
     useEffect(() => {
@@ -82,9 +84,14 @@ export default function App() {
     useEffect(() => {
       let loadToken = async () => {
         try {
-          const authToken = await storage.get('auth_token');
-          console.log(authToken);
-          dispatch({type : "RESTORE_TOKEN", authToken})
+          const raw = await storage.get('curr_user');
+          if(raw) {
+            const currUser = JSON.parse(raw);
+            dispatch({type : "RESTORE_TOKEN", authToken : currUser.authToken, email : currUser.email})
+          }
+          else {
+            dispatch({type : "RESTORE_TOKEN", authToken : null, email : null})
+          }
         }
         catch(e) {
           console.log(e)
@@ -96,8 +103,9 @@ export default function App() {
     const authContext = useMemo(() => ({
       signIn: async (payload) => {
         let authToken = null;
+        let email = null;
         // Calls login request
-        await fetch("http://10.0.2.2:5000/login", {
+        await fetch("http://10.0.2.2:3000/login", {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -110,43 +118,26 @@ export default function App() {
             console.log(data);
             // Stores auth-token if successful
             if(data.code === 200) {
+              email = payload.email;
               authToken = data.authToken;
-              storeToken(data.authToken);
+              storeCurrUser({email, authToken});
+              dispatch({type : "LOG_IN", authToken, email});
             }
         });
-        console.log("before dispatch: " + authToken);
-        dispatch({type : "LOG_IN", authToken});
       },
       signOut: async () => {
         // Destroy locally-stored token
         try {
-          await storage.remove('auth_token');
+          await storage.remove('curr_user');
         }
         catch(e) {
           console.log(e);
         }
         dispatch({type : "LOG_OUT"});
-      }
-    }),[]);
-
-    return (
-        <NavigationContainer>
-          <AuthProvider value={authContext}>
-            <Tab.Navigator>
-              {state.authToken != null ?
-                <>
-                <Tab.Screen name="Map" component={MapScreen} />
-                <Tab.Screen name="Announcements" component={AnnouncementsScreen} />
-                <Tab.Screen name="Home" component={HomeScreen} />
-                <Tab.Screen name="Calendar" component={CalendarScreen} />
-                <Tab.Screen name="My Profile" component={Profile} />
-                </>
-                : <Tab.Screen name="Login" component={Login} />
-              }
-            </Tab.Navigator>
-          </AuthProvider>
-        </NavigationContainer>
-    );
+      },
+      ...state
+    }),[state]);
+        
     const setUpNotifications = async () => {
       const notificationOpen = await firebase.notifications().getInitialNotification();
       if (notificationOpen) {
@@ -172,9 +163,6 @@ export default function App() {
       notificationDisplayedListener();
       notificationListener();
       notificationOpenedListener();
-
-
-    >>>>>>> notifications
     }
 
     const notificationDisplayedListener = firebase.notifications().onNotificationDisplayed((notification) => {
@@ -221,4 +209,25 @@ export default function App() {
         {text: "OK", onPress: () => console.log("OK Pressed")},
       ], {cancelable: false});
     };
+
+    return (
+        <NavigationContainer>
+          <AuthProvider value={authContext}>
+          <Tab.Navigator>
+              {state.authToken != null ?
+                <>
+                <Tab.Screen name="Map" component={MapScreen} />
+                <Tab.Screen name="Announcements" component={AnnouncementsScreen} />
+                <Tab.Screen name="Home" component={HomeScreen} />
+                <Tab.Screen name="Calendar" component={CalendarScreen} />
+                <Tab.Screen name="My Profile" component={Profile} />
+                <Tab.Screen name="Quiz" component={Quiz} />
+                <Tab.Screen name="Results" component={Results} />
+                </>
+                : <Tab.Screen name="Login" component={Login} />
+              }
+            </Tab.Navigator>
+          </AuthProvider>
+        </NavigationContainer>
+    );
 }
