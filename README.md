@@ -1,4 +1,7 @@
 # The HackTX Attendee App
+The application is split into a client and server folder, each of which has its own setup.  Click into each folder to see how to setup each individual portion.
+
+# The HackTX Attendee App Frontend
 This application was written to serve the needs of HackTX Attendees.
 
 ## How set up test environment
