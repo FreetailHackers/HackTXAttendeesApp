@@ -11,9 +11,6 @@ import { RemotePushController } from '../android/app/src/services/RemotePushCont
 				<View style={{ marginTop: 20 }}>
 					<Button title={'Local Push Notification'} onPress={handleButtonPress} />
 				</View>
-				<View>
-					<RemotePushController />
-				</View>
 			</View>
 		 )
 }
