@@ -7,14 +7,13 @@ export default function({navigation}) {
     const [results, setResults] = useState([]);
 
     useEffect(() => {
-        const payload = {email, authToken}
+        let payload = {email, authToken}
+        let url = new URL('http://10.0.2.2:3000/results');
+        Object.keys(payload).forEach(key => url.searchParams.append(key, payload[key]))
+
         const subscription = setInterval(() => {
-            fetch('http://10.0.2.2:3000/results', {
+            fetch(url,{
                 method: 'GET',
-                headers: {
-                    'Content-Type' : 'application/json'
-                },
-                body: JSON.stringify(payload)
             }).then((res) => res.json()).then((data) => {
                 if(data.code === 200) {
                     setResults(data.results);
@@ -34,7 +33,7 @@ export default function({navigation}) {
             }).catch(err => alert(err))
         }, 1000);
 
-        return clearInterval(subscription);
+        return () => {clearInterval(subscription)}
     },[]);
 
     return (
@@ -44,7 +43,7 @@ export default function({navigation}) {
                 <Text>Results wahoo</Text>
                 {
                     results.map((user, index) => {
-                        return <Text>{user.email}</Text>   
+                        return <Text key={index} >{user.email}</Text>   
                     })
                 }
             </SafeAreaView>

@@ -64,7 +64,6 @@ app.post('/login', (req, res)=>{
   });
 
   app.post('/results/', (req, res) => {
-      console.log(req.body)
       Users.find({'email': req.body.email}, (err, users) => {
           if(err) console.log(err);
           if(users.length === 0) {
@@ -89,13 +88,17 @@ app.post('/login', (req, res)=>{
   })
 
   app.get('/results', (req, res) => {
-    console.log(req.body)
-    
+    console.log(req.query)
+
     const computeScore = (a, b) => {
         let diffSum = 0;
+        for(let i = 0; i < a.length; i++) {
+            diffSum += Math.abs(a[i] - b[i]);
+        }
+        return diffSum;
     }
 
-    Users.find({'email': req.body.email}, (err, users) => {
+    Users.find({'email': req.query.email}, (err, users) => {
         if(err) console.log(err);
         if(users.length === 0) {
             res.json({"code": 401, "message" : "User not found"})
@@ -103,18 +106,19 @@ app.post('/login', (req, res)=>{
         }
         else {
             const user = users[0];
-            if(req.body.authToken !== user.auth_token) {
+            if(req.query.authToken !== user.auth_token) {
               res.json({"code": 401, "message" : "Invalid auth token"})
               return;
             }
             else {
-              console.log(user);
-              Users.find({'email' : {$ne : req.body.email}}, (err, users) => {
-                  users.map((user, index) => {
-                      return {email: user.email}
+              Users.find({'email' : {$ne : req.query.email}, 'quiz_results.taken' : true}, (err, users) => {
+                  let ret = users.map((curr, index) => {
+                      let score = computeScore(user.quiz_results.results, curr.quiz_results.results);
+                      return {email: curr.email, score};
                   })
-                  console.log(users);
-                  res.json({"code": 200, "message" : "Results found", "results" : users})
+
+                  ret.sort((a, b) => {return a.score - b.score});
+                  res.json({"code": 200, "message" : "Results found", "results" : ret})
               })
             }
         }
