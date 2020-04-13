@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "518755674815",
+    "firebase_url": "https://hacktx-app.firebaseio.com",
+    "project_id": "hacktx-app",
+    "storage_bucket": "hacktx-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518755674815:android:0fa16a2e060c44f49a340a",
+        "android_client_info": {
+          "package_name": "com.hacktxattendees"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "518755674815-83d5ehoamdh1fcuggga0to3kd26o0pd5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtYW67cc6TTDZ4CZSlMm1SKhRQMYOzoMw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "518755674815-83d5ehoamdh1fcuggga0to3kd26o0pd5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

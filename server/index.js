@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.listen(port, () => {
-    console.log(`listening on port ${ port }`);  
+    console.log(`listening on port ${ port }`);
 });
 
 app.post('/register', (req, res) => {
@@ -40,9 +40,9 @@ app.post('/register', (req, res) => {
 
 app.post('/login', (req, res)=>{
     Users.find({'email' : req.body.email}, (err, users) => {
-      if(err) console.log(err);    
+      if(err) console.log(err);
       if(users.length === 0)
-      {      
+      {
         res.json({"code": 401, "message" : "Failed to log in"});
         return;
       }
