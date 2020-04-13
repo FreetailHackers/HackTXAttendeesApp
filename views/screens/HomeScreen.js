@@ -3,10 +3,10 @@ import { StatusBar, SafeAreaView, Button, Text, TouchableOpacity, StyleSheet, Im
 
 
 const rows = [
-    { id: 0, text: 'Announcements' },
-    { id: 1, text: 'Calendar' },
-    { id: 2, text: 'Map' },
-    { id: 3, text: 'Profile' },
+    { id: 0, title: 'Announcements', toGo: 'Announcements' },
+    { id: 1, title: 'Calendar', toGo: 'Calendar'},
+    { id: 2, title: 'Map', toGo: 'Map'},
+    { id: 3, title: 'Profile', toGo: 'My Profile'},
   ]
   
   const extractKey = ({ id }) => id
@@ -15,43 +15,25 @@ export default function HomeScreen ({navigation}){
     return (
         <>
             <StatusBar barStyle='dark-content' />
-                { <SafeAreaView style={styles.container}>
-                    <Text style={styles.header} >Welcome to HackTX! </Text>
-                    {/* renderItem = ({ item }) => {
-                        <Text style={styles.row}>
-                            {item.text}
-                        </Text>
-                    }  */}
-                    {/* render() {
-                        <FlatList
-                            style={styles.container}
-                            data={rows}
-                            renderItem={this.renderItem}
-                            keyExtractor={extractKey}
-                        />
-                    } */}
-                    <TouchableOpacity onPress={() => navigation.navigate('Announcements')}>
-                        <View style={styles.viewStyle}>
-                            <Text> Announcements</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigation.navigate('Calendar')}>
-                        <View style={styles.viewStyle}>
-                            <Text> Calendar </Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigation.navigate('Map')}>
-                        <View style={styles.viewStyle}>
-                            <Text> Map </Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigation.navigate('My Profile')}>
-                        <View style={styles.viewStyle}>
-                            <Text> Profile </Text>
-                        </View>
-                    </TouchableOpacity>
-                </SafeAreaView> }
+                <SafeAreaView style={styles.container}>
+                    {/* <Text style={styles.header} >Welcome to HackTX! </Text> */}
+                    <FlatList 
+                        data={rows}
+                        renderItem={({item}) => <Item title={item.title} toGo={item.toGo} navigation={navigation} />}
+                        keyExtractor = {item => String(item.id)}
+                    />
+                </SafeAreaView>
         </>
+    );
+}
+
+function Item({title, toGo, navigation}) {
+    return (
+        <TouchableOpacity onPress={() => navigation.navigate(toGo)}>
+            <View style={styles.viewStyle}>
+                <Text>{title}</Text>
+            </View>
+        </TouchableOpacity>
     );
 }
 

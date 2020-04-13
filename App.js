@@ -215,15 +215,19 @@ export default function App() {
         <NavigationContainer>
           <AuthProvider value={authContext}>
             <Stack.Navigator>
+
+                {state.authToken !== null ? 
                 <>
-                <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen name="Map" component={MapScreen} />
-                <Stack.Screen name="Announcements" component={AnnouncementsScreen} />
-                <Stack.Screen name="Calendar" component={CalendarScreen} />
-                <Stack.Screen name="My Profile" component={Profile} />
-                <Stack.Screen name="Quiz" component={Quiz} />
-                <Stack.Screen name="Results" component={Results} />
-                </>
+                  <Stack.Screen name="Home" component={HomeScreen} />
+                  <Stack.Screen name="Map" component={MapScreen} />
+                  <Stack.Screen name="Announcements" component={AnnouncementsScreen} />
+                  <Stack.Screen name="Calendar" component={CalendarScreen} />
+                  <Stack.Screen name="My Profile" component={Profile} />
+                  <Stack.Screen name="Quiz" component={Quiz} />
+                  <Stack.Screen name="Results" component={Results} />
+                </>  
+                : 
+                <Stack.Screen name="Login" component={Login} />}
             </Stack.Navigator>
           </AuthProvider>
         </NavigationContainer>

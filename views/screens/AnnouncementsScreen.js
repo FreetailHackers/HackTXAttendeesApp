@@ -4,7 +4,6 @@ import { LocalNotification } from '../../android/app/src/services/LocalPushContr
 import { RemotePushController } from '../../android/app/src/services/RemotePushController'
  
 
-<<<<<<< HEAD
  export default function AnnouncementsScreen() {
 		return (
 			<View style={styles.container}>
@@ -30,15 +29,3 @@ const styles = StyleSheet.create({
     marginTop: 20
   }
 })
-=======
-export default function AnnouncementsScreen ({navigation}) {
-    return (
-        <>
-            <StatusBar barStyle='dark-content' />
-            <SafeAreaView style={{flex : 1, backgroundColor: "#00FF00"}}>
-                <Text>announcements</Text>
-            </SafeAreaView>
-        </>
-    );
-}
->>>>>>> origin/interface
