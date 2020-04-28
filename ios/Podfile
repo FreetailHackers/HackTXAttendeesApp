@@ -41,13 +41,3 @@ target 'HackTXAttendees' do
 
   use_native_modules!
 end
-
-target 'HackTXAttendees-tvOS' do
-  # Pods for HackTXAttendees-tvOS
-
-  target 'HackTXAttendees-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-end

@@ -19,6 +19,7 @@
     "node-uuid": "^1.4.8",
     "react": "16.9.0",
     "react-native": "0.61.5",
+    "react-native-dotenv": "^0.2.0",
     "react-native-firebase": "^5.6.0",
     "react-native-gesture-handler": "^1.6.0",
     "react-native-push-notification": "^3.1.9",
@@ -29,12 +30,15 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
-    "@babel/runtime": "^7.9.2",
-    "@react-native-community/eslint-config": "0.0.5",
     "babel-jest": "24.9.0",
+    "@babel/runtime": "^7.9.2",
+    "bcrypt-nodejs": "0.0.3",
+    "@react-native-community/eslint-config": "0.0.5",
     "eslint": "6.8.0",
+    "express": "^4.17.1",
     "jest": "24.9.0",
     "metro-react-native-babel-preset": "0.56.4",
+    "mongoose": "^5.9.10",
     "react-test-renderer": "16.9.0"
   },
   "jest": {

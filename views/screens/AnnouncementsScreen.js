@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, Button, StyleSheet } from 'react-native'
-import { LocalNotification } from '../../android/app/src/services/LocalPushController'
-import { RemotePushController } from '../../android/app/src/services/RemotePushController'
+// import { LocalNotification } from '../../android/app/src/services/LocalPushController'
+// import { RemotePushController } from '../../android/app/src/services/RemotePushController'
  
 
  export default function AnnouncementsScreen() {
@@ -16,7 +16,8 @@ import { RemotePushController } from '../../android/app/src/services/RemotePushC
 }
 
 function handleButtonPress() {
-	LocalNotification();
+	// LocalNotification();
+	console.log("Button pressed");
 }
 
 const styles = StyleSheet.create({
