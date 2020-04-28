@@ -33,9 +33,9 @@ const Stack = createStackNavigator();
 function reducer(prevState, action) {
   switch(action.type) {
     case "RESTORE_TOKEN":
-      return {...prevState, isLoading: false, authToken: action.authToken, email: action.email};
+      return {...prevState, isLoading: false, authToken: action.authToken, id: action.id};
     case "LOG_IN":
-      return {...prevState, isSignOut: false, authToken: action.authToken, email: action.email};
+      return {...prevState, isSignOut: false, authToken: action.authToken, id: action.id};
     case "LOG_OUT":
       return {...prevState, isSignOut: true, authToken: null, email: null};
     default:
@@ -57,11 +57,11 @@ export default function App() {
   const [state, dispatch] = useReducer(reducer, initalState);
 
   // handle set up for push notifications
-  useEffect(() => {
-    this.checkPermission();
-    setUpNotifications();
-    persistNotifications();
-  }, []);
+  // useEffect(() => {
+  //   this.checkPermission();
+  //   setUpNotifications();
+  //   persistNotifications();
+  // }, []);
 
   checkPermission = async () => {
     const enabled = await firebase.messaging().hasPermission();
@@ -146,10 +146,10 @@ export default function App() {
         const raw = await storage.get('curr_user');
         if(raw) {
           const currUser = JSON.parse(raw);
-          dispatch({type : "RESTORE_TOKEN", authToken : currUser.authToken, email : currUser.email})
+          dispatch({type : "RESTORE_TOKEN", authToken : currUser.authToken, id : currUser.id})
         }
         else {
-          dispatch({type : "RESTORE_TOKEN", authToken : null, email : null})
+          dispatch({type : "RESTORE_TOKEN", authToken : null, id : null})
         }
       }
       catch(e) {
@@ -164,7 +164,8 @@ export default function App() {
       let authToken = null;
       let email = null;
       // Calls login request
-      await fetch(SERVER_URL + "/register", {
+      await fetch(SERVER_URL + "/auth/login", {
+
           method: 'POST',
           headers: {
               Accept: 'application/json',
@@ -176,13 +177,13 @@ export default function App() {
       .then((data) => {
           console.log(data);
           // Stores auth-token if successful
-          if(data.code === 200) {
-            email = payload.email;
-            authToken = data.authToken;
-            storeCurrUser({email, authToken});
-            dispatch({type : "LOG_IN", authToken, email});
+          if(data.message === undefined) {
+            id = data.user.id;
+            authToken = data.user.token;
+            storeCurrUser({id, authToken});
+            dispatch({type : "LOG_IN", authToken, id});
           }
-      });
+      }).catch((err) => console.log(err));
     },
     signOut: async () => {
       // Destroy locally-stored token

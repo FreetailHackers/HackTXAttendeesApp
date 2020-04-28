@@ -17,6 +17,7 @@
     "@react-navigation/native": "^5.0.9",
     "@react-navigation/stack": "^5.1.1",
     "node-uuid": "^1.4.8",
+    "path": "^0.12.7",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-dotenv": "^0.2.0",

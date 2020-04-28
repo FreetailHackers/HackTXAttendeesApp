@@ -66,3 +66,5 @@ server/.env
 server/application/db/
 
 .vs
+
+.env

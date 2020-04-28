@@ -1,6 +1,7 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext} from 'react'
 import AuthContext from '../context/AuthContext'
-import {StatusBar, SafeAreaView, Text, TouchableOpacity, View, Alert} from 'react-native';
+import { SERVER_URL} from 'react-native-dotenv'
+import {StatusBar, SafeAreaView, Text, TouchableOpacity, View, Alert} from 'react-native'
 
 export default function Quiz({navigation}) {
     const [index, setIndex] = useState(0);
@@ -19,7 +20,7 @@ export default function Quiz({navigation}) {
     useEffect(() => {
         if(results.length >= questions.length) {
             const payload = {email, authToken, results}
-            fetch('http://10.0.2.2:3000/results', {
+            fetch(SERVER_URL + 'api/users/' + id + '/quiz', {
                 method: 'POST',
                 headers: {
                     'Content-Type' : 'application/json'
