@@ -14,6 +14,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		8C0AA3C03392924A82264319 /* libPods-HackTXAttendeesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 276C8EBECA9CE1C195024111 /* libPods-HackTXAttendeesTests.a */; };
 		8CE7FD22249B7A2A8153A2BF /* libPods-HackTXAttendees.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 314DFF84871721541BDF7B6F /* libPods-HackTXAttendees.a */; };
+		A8BAA5B62457E82200D17B09 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A8BAA5B52457E82200D17B09 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,8 +48,7 @@
 		571DAC51FA2257BB4DB1ACA4 /* Pods-HackTXAttendees-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackTXAttendees-tvOS.release.xcconfig"; path = "Target Support Files/Pods-HackTXAttendees-tvOS/Pods-HackTXAttendees-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		5BE2544F3F11D35E1650B034 /* Pods-HackTXAttendees.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackTXAttendees.release.xcconfig"; path = "Target Support Files/Pods-HackTXAttendees/Pods-HackTXAttendees.release.xcconfig"; sourceTree = "<group>"; };
 		8A96647D3882B61A2B4B7646 /* Pods-HackTXAttendees-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackTXAttendees-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-HackTXAttendees-tvOSTests/Pods-HackTXAttendees-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		A832D96F2457AE6600B33767 /* HackTXAttendeesDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = HackTXAttendeesDebug.entitlements; path = HackTXAttendees/HackTXAttendeesDebug.entitlements; sourceTree = "<group>"; };
-		A832D9702457AE7900B33767 /* HackTXAttendeesRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = HackTXAttendeesRelease.entitlements; path = HackTXAttendees/HackTXAttendeesRelease.entitlements; sourceTree = "<group>"; };
+		A8BAA5B52457E82200D17B09 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B0084A04B0F42123EE6EC09C /* Pods-HackTXAttendees-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackTXAttendees-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-HackTXAttendees-tvOS/Pods-HackTXAttendees-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		CEE24F2A97456F35525DFA53 /* Pods-HackTXAttendeesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackTXAttendeesTests.release.xcconfig"; path = "Target Support Files/Pods-HackTXAttendeesTests/Pods-HackTXAttendeesTests.release.xcconfig"; sourceTree = "<group>"; };
 		E3FDA1F0A59083EA341555DC /* Pods-HackTXAttendees.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackTXAttendees.debug.xcconfig"; path = "Target Support Files/Pods-HackTXAttendees/Pods-HackTXAttendees.debug.xcconfig"; sourceTree = "<group>"; };
@@ -96,11 +96,10 @@
 		13B07FAE1A68108700A75B9A /* HackTXAttendees */ = {
 			isa = PBXGroup;
 			children = (
-				A832D9702457AE7900B33767 /* HackTXAttendeesRelease.entitlements */,
-				A832D96F2457AE6600B33767 /* HackTXAttendeesDebug.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				A8BAA5B52457E82200D17B09 /* GoogleService-Info.plist */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -259,6 +258,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				A8BAA5B62457E82200D17B09 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +390,7 @@
 			baseConfigurationReference = 1846B79C363E9E7525888C4E /* Pods-HackTXAttendeesTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -414,6 +415,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HackTXAttendeesTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -436,6 +438,7 @@
 				CODE_SIGN_ENTITLEMENTS = HackTXAttendees/HackTXAttendeesDebug.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HackTXAttendees/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -456,6 +459,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HackTXAttendees/HackTXAttendeesRelease.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HackTXAttendees/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (

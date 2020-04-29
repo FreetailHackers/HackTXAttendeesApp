@@ -12,8 +12,12 @@ export default function Login({navigation}) {
             <StatusBar barStyle='dark-content' />
             <SafeAreaView style={{flex : 1, backgroundColor: "#00FF00"}}>
                 <Text style={{textAlign: "center"}}>Login</Text>
-                <TextInput style={{borderWidth: 2}} onChangeText={text => setEmail(text)} value={email} />
-                <TextInput style={{borderWidth: 2}} onChangeText={text => setPassword(text)} secureTextEntry={true} value={password} />
+                <TextInput style={{borderWidth: 2}} 
+                    autoCapitalize='none'
+                    onChangeText={text => setEmail(text)} value={email} />
+                <TextInput style={{borderWidth: 2}}
+                    autoCapitalize='none'
+                    onChangeText={text => setPassword(text)} secureTextEntry={true} value={password} />
                 <Button title="Submit" onPress={() => signIn({email, password})} />
             </SafeAreaView>
         </>
